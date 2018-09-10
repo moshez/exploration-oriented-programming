@@ -1,0 +1,34 @@
+List of slides:
+
+* What is it?
+* Kernel
+* Magic
+* Adding a kernel
+* Security model
+* Notebooks
+* Notebooks structure
+
+* History
+* Global namespace
+* Redefining functions
+* Immutable data structures
+* Verification as testing
+* Classes
+* Dispatching
+
+* Git interactions
+* Cleaning outputs
+* Linting
+* Testing
+* Custom diffs
+* Custom merge
+
+* Importing notebooks
+* Integrating with packages
+* Producing documentation
+* Building wheels
+* Exporting API
+
+* Code as successive approximation
+* REPL as IDE
+* LISP, Smalltalk, Logo
