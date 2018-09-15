@@ -75,14 +75,41 @@ def add_to(kernel_venv, jupyter_venv):
 
 \begin{frame}
 \frametitle{Security Model}
+
+\begin{itemize}
+\item Opaque security token
+\item By default, listen only on localhost
+\end{itemize}
+
 \end{frame}
 
 \begin{frame}
 \frametitle{Notebooks}
+
+\begin{itemize}
+\item Editable history
+\item Inputs and outputs
+\item Code, not state
+\begin{itemize}
+
 \end{frame}
 
-\begin{frame}
+\begin{frame}[fragile]
 \frametitle{Notebooks from the Inside}
+
+\begin{lstlisting}
+{
+ "cells": [
+  { "cell_type": "code",
+   ...
+    "source": ["1 + 1"]
+  }
+ ]
+ "nbformat": 4,
+ "nbformat_minor": 1
+}
+\end{lstlisting}
+
 \end{frame}
 
 7 minute mark
