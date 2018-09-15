@@ -43,7 +43,7 @@
 \frametitle{Magic}
 
 \begin{lstlisting}
-%pdb
+%%pdb
 \end{lstlisting}
 
 \begin{lstlisting}
@@ -53,8 +53,24 @@
 
 \end{frame}
 
-\begin{frame}
+\begin{frame}[fragile]
 \frametitle{Managing Kernels}
+
+\begin{lstlisting}
+def add_to(kernel_venv, jupyter_venv):
+    python = os.path.join(kernel_venv, 'bin', 'python')
+    name = os.path.basename(kernel_venv)
+    subprocess.check_call([python, '-m',
+                           'pip', 'install', 'ipykernel'])
+    subprocess.check_call([python, '-m',
+                           'ipykernel', 'install',
+                           '--name', name,
+                           '--display-name', name,
+                           '--prefix', venv])
+    jupyter = os.path.join(jupyter_venv, 'bin', 'jupyter')
+    spec = os.path.join(venv, 'share/jupyter/kernels', name)
+    subprocess.check_call([jupyter, 'kernelspec', 'install', spec])
+\end{lstlisting}
 \end{frame}
 
 \begin{frame}
