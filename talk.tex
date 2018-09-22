@@ -192,19 +192,56 @@ pvector([1, 2, 4])
 \end{lstlisting}
 
 \end{frame}
-%
-%\begin{frame}
-%\frametitle{Verification as testing}
-%\end{frame}
-%
-%\begin{frame}
-%\frametitle{Classes}
-%\end{frame}
-%
-%\begin{frame}
-%\frametitle{Dispatching}
-%\end{frame}
-%
+
+\begin{frame}[fragie]
+\frametitle{Verification as testing}
+
+\begin{lstlisting}[frame=single]
+# test
+x = [1, 2, 3]
+y = increase_tail(x)
+assert_that(y[2], is_(5))
+\end{lstlisting}
+
+\begin{lstlisting}[frame=single]
+...
+AssertionError: 
+Expected: <5>
+     but: was <4>
+\end{lstlisting}
+
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Classes}
+
+\begin{lstlisting}[frame=single]
+@attr.s(frozen=True)
+class Point:
+     x = attr.ib()
+     y = attr.ib()
+\end{lstlisting}
+
+
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Dispatching}
+
+\begin{lstlisting}[frame=single]
+@singledispatch
+def abs(thing):
+    raise NotImplementedError("Cannot absolute value", thing)
+\end{lstlisting}
+
+\begin{lstlisting}[frame=single]
+@abs.register(Point)
+def abs(pt):
+    return (pt.x**2 + pt.y**2) ** 0.5
+\end{lstlisting}
+
+\end{frame}
+
 %14 minute mark
 %
 %\begin{frame}
