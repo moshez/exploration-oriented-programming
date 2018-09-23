@@ -265,7 +265,31 @@ def abs(pt):
 
 \begin{frame}
 \frametitle{Cleaning outputs}
+
+\begin{lstlisting}
+with open("something.ipynb") as fpin:
+    data = fpin.read()
+    parsed = json.loads(data)
+    for cell in parsed["cells"]:
+        del cell["output"]
+        del cell["execution_count"]
+with open("something_cleaned.ipynb") as fpout:
+    fpout.write(json.dumps(parsed))
+\end{lstlisting}
+
 \end{frame}
+
+\begin{frame}
+\frametitle{Cleaning outputs}
+
+\begin{itemize}
+\item Pre-commit hook
+\item Test in CI that re-cleaning gives same result
+\item Code review the cleaned file
+\end{itemize}
+
+\end{frame}
+
 
 %\begin{frame}
 %\frametitle{Lint}
