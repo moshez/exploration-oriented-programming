@@ -291,13 +291,21 @@ with open("something_cleaned.ipynb") as fpout:
 \end{frame}
 
 
-%\begin{frame}
-%\frametitle{Lint}
-%\end{frame}
-%
-%\begin{frame}
-%\frametitle{Test}
-%\end{frame}
+\begin{frame}
+
+\frametitle{Lint}
+
+\begin{lstlisting}
+% jupyter nbconvert --to=python something.ipynb
+% flake8 something.py
+\end{lstlisting}
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Test}
+\end{frame}
+
 %
 %\begin{frame}
 %\frametitle{Custom diff}
