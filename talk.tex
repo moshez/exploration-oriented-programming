@@ -304,6 +304,19 @@ with open("something_cleaned.ipynb") as fpout:
 
 \begin{frame}
 \frametitle{Test}
+
+\begin{lstlisting}
+with open("something.ipynb") as fpin:
+    notebook = json.loads(fpin.read())
+with open("something.py", "w") as fpout:
+    for cell in notebook["cells"]:
+        if ("# pragma: interactive-only" in
+            cell["source"]):
+            continue
+        fpout.write(f"\n{cell['source']}\n")
+subprocess.check_output(["pytest", "something.py"])
+\end{lstlisting}
+
 \end{frame}
 
 %
