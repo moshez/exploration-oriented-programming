@@ -319,10 +319,28 @@ subprocess.check_output(["pytest", "something.py"])
 
 \end{frame}
 
-%
-%\begin{frame}
-%\frametitle{Custom diff}
-%\end{frame}
+
+\begin{frame}
+\frametitle{Custom diff}
+
+\begin{lstlisting}
+# Suitable for use as "git difftool"
+def to_lines(fname):
+    with open(fname) as fpin:
+        contents = json.loads(fpin.read())
+    for i, cell in enumerate(contents["cells"]):
+        yield f'Cell {i}'
+        yield from cell["source"].splitlines()
+sys.stdout.writelines(difflib.contextdiff(
+    to_lines(os.environ['LOCAL']),
+    to_lines(os.environ['REMOTE']),
+    'a/' + os.environ['MERGED'],
+    'b/' + os.environ['MERGED'],
+))
+\end{lstlisting}
+
+
+\end{frame}
 %
 %\begin{frame}
 %\frametitle{Custom merge}
