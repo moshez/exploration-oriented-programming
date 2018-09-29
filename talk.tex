@@ -354,13 +354,48 @@ sys.stdout.writelines(difflib.contextdiff(
 
 \end{frame}
 
-%
-%21 minute mark
-%
-%\begin{frame}
-%\frametitle{Importing notebooks}
-%\end{frame}
-%
+
+21 minute mark
+
+\begin{frame}[fragile]
+\frametitle{Importing Notebooks}
+
+\begin{lstlisting}
+@attr.s(frozen=True)
+class NotebookLoader:
+    contents = attr.ib()
+
+    def create_module(self, spec):
+        return importlib.util.module_from_spec(spec)
+
+    def exec_module(self, module):
+        for cell in json.loads(contents)["cells"]:
+            if cell.starts_with("#pragma: module"):
+               exec(cell, module.__dict__)
+\end{lstlisting}
+
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Finding Notebooks}
+
+\begin{lstlisting}
+class NotebookFinder(object):
+ 
+    def find_module(self, fullname, path=None):
+        if path is None:
+            return None
+        name = fullname.split('.')[-1] + '.ipynb'
+        if not resources.is_resource(path, name):
+            return None
+        return NotebookLoader(resources.read_text(path, name))
+
+import sys
+sys.meta_path.append(NotebookFinder)
+\end{lstlisting}
+
+\end{frame}
+
 %\begin{frame}
 %\frametitle{Integrating with packages}
 %\end{frame}
