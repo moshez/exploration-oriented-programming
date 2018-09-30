@@ -391,14 +391,24 @@ class NotebookFinder(object):
         return NotebookLoader(resources.read_text(path, name))
 
 import sys
-sys.meta_path.append(NotebookFinder)
+sys.meta_path.append(NotebookFinder())
 \end{lstlisting}
 
 \end{frame}
 
-%\begin{frame}
-%\frametitle{Integrating with packages}
-%\end{frame}
+\begin{frame}
+\frametitle{Integrating with packages}
+
+\begin{lstlisting}
+somepackage/
+           __init__.py
+             import sys
+             sys.meta_path.append(NotebookFinder())
+           module.ipynb
+\end{lstlisting}
+
+\end{frame}
+
 %
 %\begin{frame}
 %\frametitle{Producing documentation}
