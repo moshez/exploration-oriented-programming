@@ -409,14 +409,32 @@ somepackage/
 
 \end{frame}
 
-%
-%\begin{frame}
-%\frametitle{Producing documentation}
-%\end{frame}
-%
-%\begin{frame}
-%\frametitle{Producing documentation}
-%\end{frame}
+
+\begin{frame}
+\frametitle{Producing documentation}
+
+\begin{lstlisting}
+.. automodule package.module
+   :members:
+\end{lstlisting}
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Producing documentation}
+
+\begin{lstlisting}
+with open("something.ipynb") as fpin:
+    notebook = json.loads(fpin)
+with open("something.md", "w") as mdout:
+    for cell in notebook["cells"]:
+        if cell["cell_type"] != "markdown":
+            continue
+        mdout.write(cell["source"])
+\end{lstlisting}
+
+\end{frame}
+
 %
 %\begin{frame}
 %\frametitle{Building wheels}
