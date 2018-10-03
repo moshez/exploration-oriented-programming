@@ -440,20 +440,42 @@ with open("something.md", "w") as mdout:
 \frametitle{Building wheels}
 
 \begin{lstlisting}
-include *.ipynb
+MANIFEST.in
+  include *.ipynb
 \end{lstlisting}
 
 \end{frame}
 
-%\begin{frame}
-%\frametitle{Exporting API}
-%\end{frame}
-%
-%28 minute mark
-%
-%\begin{frame}
-%\frametitle{Code as Successive Approximation}
-%\end{frame}
+\begin{frame}[fragile]
+\frametitle{Exporting API}
+
+\begin{lstlisting}[frame=single]
+INTERACTIVE = False
+\end{lstlisting}
+
+\begin{lstlisting}[frame=single]
+# pragma: interactive-only 
+INTERACTIVE = True
+\end{lstlisting}
+
+\begin{lstlisting}[frame=single]
+from publication import publish
+__all__ = ['some_function',
+           'SomeClass']
+if not INTERACTIVE:
+    publish()
+\end{lstlisting}
+    
+
+\end{lstlisting}
+
+\end{frame}
+
+28 minute mark
+
+\begin{frame}
+\frametitle{Code as Successive Approximation}
+\end{frame}
 %
 %\begin{frame}
 %\frametitle{REPL as IDE}
