@@ -193,7 +193,7 @@ pvector([1, 2, 4])
 
 \end{frame}
 
-\begin{frame}[fragie]
+\begin{frame}[fragile]
 \frametitle{Verification as testing}
 
 \begin{lstlisting}[frame=single]
@@ -242,7 +242,7 @@ def abs(pt):
 
 \end{frame}
 
-\begin{frame}
+\begin{frame}[fragile]
 \frametitle{Version control}
 
 \begin{lstlisting}
@@ -263,7 +263,7 @@ def abs(pt):
 
 \end{frame}
 
-\begin{frame}
+\begin{frame}[fragile]
 \frametitle{Cleaning outputs}
 
 \begin{lstlisting}
@@ -291,7 +291,7 @@ with open("something_cleaned.ipynb") as fpout:
 \end{frame}
 
 
-\begin{frame}
+\begin{frame}[fragile]
 
 \frametitle{Lint}
 
@@ -302,7 +302,7 @@ with open("something_cleaned.ipynb") as fpout:
 
 \end{frame}
 
-\begin{frame}
+\begin{frame}[fragile]
 \frametitle{Test}
 
 \begin{lstlisting}
@@ -320,7 +320,7 @@ subprocess.check_output(["pytest", "something.py"])
 \end{frame}
 
 
-\begin{frame}
+\begin{frame}[fragile]
 \frametitle{Custom diff}
 
 \begin{lstlisting}
@@ -396,7 +396,7 @@ sys.meta_path.append(NotebookFinder())
 
 \end{frame}
 
-\begin{frame}
+\begin{frame}[fragile]
 \frametitle{Integrating with packages}
 
 \begin{lstlisting}
@@ -410,7 +410,7 @@ somepackage/
 \end{frame}
 
 
-\begin{frame}
+\begin{frame}[fragile]
 \frametitle{Producing documentation}
 
 \begin{lstlisting}
@@ -420,7 +420,7 @@ somepackage/
 
 \end{frame}
 
-\begin{frame}
+\begin{frame}[fragile]
 \frametitle{Producing documentation}
 
 \begin{lstlisting}
@@ -436,7 +436,7 @@ with open("something.md", "w") as mdout:
 \end{frame}
 
 
-\begin{frame}
+\begin{frame}[fragile]
 \frametitle{Building wheels}
 
 \begin{lstlisting}
@@ -464,9 +464,6 @@ __all__ = ['some_function',
            'SomeClass']
 if not INTERACTIVE:
     publish()
-\end{lstlisting}
-    
-
 \end{lstlisting}
 
 \end{frame}
