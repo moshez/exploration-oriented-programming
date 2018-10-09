@@ -129,8 +129,6 @@ Sadly,
 inline persistent graphics
 were a thing of the past.
 
-
-
 \begin{frame}
 \frametitle{Jupyter}
 
@@ -138,6 +136,12 @@ were a thing of the past.
 
 \end{frame}
 
+After many years,
+IPython Notebooks,
+later relaunched as "Jupyter",
+brought back a graphical,
+interactive,
+persistent environment.
 
 \begin{frame}
 \frametitle{What is Jupyter?}
@@ -151,6 +155,16 @@ were a thing of the past.
 
 \end{frame}
 
+Jupyter is a collection of parts that works to create that environment.
+That includes the web server,
+the kernel that runs Python,
+a file format to save the history in
+(spoiler: those are the notebooks)
+and other goodies:
+in fact,
+Jupyter has a built-in terminal and editor,
+so it's a complete IDE in one.
+
 \begin{frame}
 \frametitle{Kernel}
 
@@ -162,6 +176,21 @@ were a thing of the past.
 \end{itemize}
 
 \end{frame}
+
+The kernel is the "heart":
+it is a Python server
+that receives snippets,
+executes them in its internal namespace,
+and then sends back the results.
+
+It uses the tornado event loop internally,
+and since Python is pretty loose about things,
+this fact is exposed to the end user.
+
+Jupyter makes it easy to recycle the kernel,
+in case we do not *want* the persistent
+in-state memory
+and want to start from scratch.
 
 \begin{frame}[fragile]
 \frametitle{Magic}
