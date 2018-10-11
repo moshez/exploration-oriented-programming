@@ -206,6 +206,16 @@ and want to start from scratch.
 
 \end{frame}
 
+The IPython "kernel" also knows some "magic" sequences.
+This can do anything from launching into a debugger
+to how to capture the output.
+
+By the way,
+if you use IPython as a REPL,
+the same magic commands work.
+If you are not using IPython as your REPL,
+you should start!
+
 \begin{frame}[fragile]
 \frametitle{Managing Kernels}
 
@@ -226,6 +236,23 @@ def add_to(kernel_venv, jupyter_venv):
 \end{lstlisting}
 \end{frame}
 
+One server can support multiple virtual environments.
+Assuming you're doing the reasonable thing and installing
+Jupyter server itself in a virtual environment,
+the instructions for how to add a virtual environment
+to an existing servers are not clear.
+
+However,
+once followed,
+this becomes a powerful tool:
+create a new virtual environment,
+and it is already available in the pre-existing browser session.
+Assuming that,
+like everybody these days,
+you are working on some microservice architecture,
+this is a useful tool to have each microservice in its own virtual environment,
+but manage them together and easily switch between them.
+
 \begin{frame}
 \frametitle{Security Model}
 
@@ -235,6 +262,23 @@ def add_to(kernel_venv, jupyter_venv):
 \end{itemize}
 
 \end{frame}
+
+When first running Jupyter,
+it will generate a random token and try to launch your browser.
+Assuming everything is simple, this will work.
+It will also print out a URL.
+Assuming everything is kinda simple, this will work.
+If all else fail,
+the URL contains a token.
+If you connect to the server,
+it will ask for a token,
+and then authenticate you.
+
+This works well when your networking set-up is exotic:
+maybe you have a proxy to your AWS VPN which sits behind an oauth proxy,
+or,
+even worse,
+you're running Jupyter in a container on your laptop.
 
 \begin{frame}
 \frametitle{Notebooks}
@@ -246,6 +290,24 @@ def add_to(kernel_venv, jupyter_venv):
 \end{itemize}
 
 \end{frame}
+
+Notebooks contain the history of your project...
+almost.
+Unlike real history,
+you can go back and edit any cell.
+This is useful for cleaning up for presentation,
+though it can be a problem when reading a notebook straight through.
+The use of a notebook is not as a *proof* a procedure
+was followed and results were given:
+it's a recipe for getting the result,
+and an editable one at that.
+
+The notebook has the inputs and the outputs in it,
+but none of the memory state.
+It maps,
+pretty much,
+to what is on the screen.
+
 
 \begin{frame}[fragile]
 \frametitle{Notebooks from the Inside}
@@ -264,6 +326,15 @@ def add_to(kernel_venv, jupyter_venv):
 \end{lstlisting}
 
 \end{frame}
+
+A notebook,
+from the inside,
+is just a JSON file.
+It has some metadata,
+and an array of "cells",
+which include the type of cells,
+as well as the source
+and possibly the output.
 
 7 minute mark
 
