@@ -338,10 +338,6 @@ and possibly the output.
 
 7 minute mark
 
-\begin{frame}
-\frametitle{REPL History}
-\end{frame}
-
 \begin{frame}[fragile]
 \frametitle{Global namespace}
 
@@ -358,6 +354,18 @@ some_thing * 2
 \end{lstlisting}
 
 \end{frame}
+
+Remember that the namespace for the notebook is global:
+be cautious and thoughtful when setting global variables.
+This is no different than most Python modules,
+but there is more temptation to randomly litter the global
+namespace with ad-hoc values for easy testing.
+There is less need than you think:
+you can run a function on a literal directly for tests.
+When defining global variables for ad-hoc reasons,
+name them in a way that is unlikely to be shadowed
+by local variables in functions,
+or your code will be surprisingly fragile.
 
 \begin{frame}[fragile]
 \frametitle{Redefining functions}
