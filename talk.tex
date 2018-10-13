@@ -461,6 +461,22 @@ Expected: <5>
 
 \end{frame}
 
+Using a library such as PyHamcrest
+(my favorite assertion library)
+we can verify that a function does the right thing.
+It will raise a nice,
+readable,
+exception if the function fails:
+in that case, we can edit the function cell,
+execute it,
+and re-execute the test.
+
+Explicitly marking such verification steps as "tests"
+means that if we want to use this Notebook as code,
+we know to skip over them if we are using it as a library,
+or to run them all if we want to test the Notebook --
+for example, in CI.
+
 \begin{frame}[fragile]
 \frametitle{Classes}
 
