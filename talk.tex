@@ -394,6 +394,15 @@ def foo(a):
 
 \end{frame}
 
+Redefining functions is sometimes useful.
+It's a good habit to edit them in a new cell,
+although for small modifications,
+sometimes editing the cell is fine.
+This is no different from updating globals,
+although in these cases,
+you will want to remove all definitions
+but one from your notebook before the end.
+
 \begin{frame}[fragile]
 \frametitle{Immutable data structures}
 
@@ -423,6 +432,15 @@ pvector([1, 2, 4])
 \end{lstlisting}
 
 \end{frame}
+
+Using immutable data structures means you can run
+reasonably efficient functions which transform the data,
+but,
+if they have a problem,
+you can edit them and try again.
+The pyrsistent library defines efficient immutable data structures.
+This is also a good way to code,
+so we can just keep our coding style as is.
 
 \begin{frame}[fragile]
 \frametitle{Verification as testing}
