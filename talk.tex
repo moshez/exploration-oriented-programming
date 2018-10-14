@@ -487,8 +487,13 @@ class Point:
      y = attr.ib()
 \end{lstlisting}
 
-
 \end{frame}
+
+The way to incrementally build classes it to make the classes
+data-first.
+Think about their data before you think about their behavior.
+Of course, we're not going to forget about immutability.
+Immutability good!
 
 \begin{frame}[fragile]
 \frametitle{Dispatching}
@@ -506,6 +511,12 @@ def abs(pt):
 \end{lstlisting}
 
 \end{frame}
+
+We can incrementally add "methods" to classes with singledispatch.
+It is an awesome library for retroactively adding methods to classes.
+I often recommend using it anyway,
+since it properly namespaces methods.
+This is one additional reason to use it.
 
 \begin{frame}[fragile]
 \frametitle{Version control}
