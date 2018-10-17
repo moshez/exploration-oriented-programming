@@ -570,6 +570,11 @@ with open("something_cleaned.ipynb") as fpout:
 
 \end{frame}
 
+One easy solution is to write an "output scrubber".
+This is an example,
+that has limited,
+but non-zero uses.
+
 \begin{frame}
 \frametitle{Cleaning outputs}
 
@@ -578,6 +583,27 @@ with open("something_cleaned.ipynb") as fpout:
 \item Test in CI that re-cleaning gives same result
 \item Code review the cleaned file
 \end{itemize}
+
+For example,
+even though it's not a valid notebook,
+it does give us a path to review the notebook.
+We clean before we commit,
+and commit the result.
+This,
+of course,
+depends on client behavior,
+so we cannot depend on that.
+Instead,
+we have CI checking that cleaning the checked-in notebook
+yields the same result as the checked-in clean notebook,
+and fail otherwise.
+Doing it in CI means we prevent merges that have not been scrubbed
+properly.
+The next step is to follow the rule that we only {\em review}
+the cleaned notebook's diff.
+Even though we'll {\em use} the non-clean notebook,
+this process ensures we are not missing any important
+differences.
 
 \end{frame}
 
