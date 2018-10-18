@@ -584,6 +584,8 @@ but non-zero uses.
 \item Code review the cleaned file
 \end{itemize}
 
+\end{frame}
+
 For example,
 even though it's not a valid notebook,
 it does give us a path to review the notebook.
@@ -605,9 +607,6 @@ Even though we'll {\em use} the non-clean notebook,
 this process ensures we are not missing any important
 differences.
 
-\end{frame}
-
-
 \begin{frame}[fragile]
 
 \frametitle{Lint}
@@ -618,6 +617,16 @@ differences.
 \end{lstlisting}
 
 \end{frame}
+
+Running a linter is even easier:
+in CI,
+or via something like :code:`tox`
+or :code:`nox`,
+we can convert our notebooks to Python,
+and run lint against those.
+The downside,
+unfortunately,
+is that line numbers get jumbled.
 
 \begin{frame}[fragile]
 \frametitle{Test}
