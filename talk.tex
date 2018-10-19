@@ -645,6 +645,14 @@ subprocess.check_output(["pytest", "something.py"])
 
 \end{frame}
 
+We can improvise something to directly run our notebook,
+with the exception of some "interactive-only"
+tests.
+If we have written "verifications" inside the notebook
+that are functions named "test" and use something like
+PyHamcrest,
+this will be useful to run automatically.
+
 
 \begin{frame}[fragile]
 \frametitle{Custom diff}
@@ -665,8 +673,14 @@ sys.stdout.writelines(difflib.contextdiff(
 ))
 \end{lstlisting}
 
-
 \end{frame}
+
+We can take advantage of Python difflib,
+and the ability of version control systems to
+have custom diff tools,
+in order to write a custom diff tool.
+While it would not help reviewing on GitHub,
+it does help local comparison work.
 
 \begin{frame}
 \frametitle{Custom merge}
