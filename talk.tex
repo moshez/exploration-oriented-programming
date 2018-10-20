@@ -694,6 +694,13 @@ it does help local comparison work.
 
 \end{frame}
 
+It is possible to write a custom merge tool,
+as well,
+that understands cells and notebooks.
+This is definitely not going to fit on a slide,
+even with significant simplifications.
+However,
+it can be worth it.
 
 21 minute mark
 
@@ -715,6 +722,18 @@ class NotebookLoader:
 \end{lstlisting}
 
 \end{frame}
+
+Python has custom import hooks nowadays.
+They are a little non-trivial to understand at first,
+but reasonably straightforward to write.
+In this case,
+we take all cells that have the "module" pragma,
+and execute them to make a module.
+There are,
+of course,
+other approaches,
+but this is enough for a bare-bones notebook imports.
+
 
 \begin{frame}[fragile]
 \frametitle{Finding Notebooks}
