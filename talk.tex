@@ -755,6 +755,10 @@ sys.meta_path.append(NotebookFinder())
 
 \end{frame}
 
+The other part of the import machinery is a finder.
+This finder assumes notebooks will always be a part of a package.
+This simplifies the finding logic, and makes sense.
+
 \begin{frame}[fragile]
 \frametitle{Integrating with packages}
 
@@ -768,6 +772,16 @@ somepackage/
 
 \end{frame}
 
+The file structure that results is fairly straightforward.
+It's probably a good idea to check if a NotebookFinder 
+is already in the meta path,
+but I am going to leave these implementation details out.
+The trick of making sure that the loader is correctly set up
+in the dunder-init file,
+however,
+is the crux here:
+this allows just distributing a regular package,
+without any exotic installation instructions.
 
 \begin{frame}[fragile]
 \frametitle{Producing documentation}
@@ -778,6 +792,10 @@ somepackage/
 \end{lstlisting}
 
 \end{frame}
+
+Since Sphinx works by importing modules,
+we can create documentation using Sphinx the same
+way we do with any other package.
 
 \begin{frame}[fragile]
 \frametitle{Producing documentation}
@@ -794,6 +812,15 @@ with open("something.md", "w") as mdout:
 
 \end{frame}
 
+We can also spit all markdown cells into a file,
+and put that in.
+If we do it in the right order,
+and set up all the commands with something like
+tox or nox,
+we can have our nice documentation produced by our build process.
+Luckily,
+Sphinx supports markdown semi-natively!
+
 
 \begin{frame}[fragile]
 \frametitle{Building wheels}
@@ -804,6 +831,9 @@ MANIFEST.in
 \end{lstlisting}
 
 \end{frame}
+
+In order to build wheels,
+all we have to do is write the right thing in the MANIFEST file.
 
 \begin{frame}[fragile]
 \frametitle{Exporting API}
@@ -827,6 +857,16 @@ if not INTERACTIVE:
 
 \end{frame}
 
+With a little tricky logic,
+even if things get executed by default,
+we can easily use inversion logic to avoid executing things
+in the Jupyter notebook.
+This is not a great habit!
+These things won't get to enjoy the interactivity powers of Jupyter.
+However,
+for publishing API,
+this probably makes sense.
+
 28 minute mark
 
 \begin{frame}
@@ -835,6 +875,18 @@ if not INTERACTIVE:
 Are we ever "done"?
 
 \end{frame}
+
+Code is never "done".
+This is a truism of the software industry.
+We keep finding bugs,
+adding features,
+and adapting to a changing world.
+This is why dynamic languages like Python are so much fun:
+changing things is easy.
+Jupyter is a platform for changing,
+for fiddling,
+for poking and prodding.
+It is the truest manifestation of the software development experience.
 
 \begin{frame}
 \frametitle{REPL as IDE}
@@ -846,16 +898,40 @@ Are we ever "done"?
 
 \end{frame}
 
-\begin{frame}
-\frametitle{Our predecessors}
+The Jupyter REPL,
+as far as IDEs go,
+is probably the poorest you have ever used.
+Its completion is worse than PyCharm's.
+Its integration with native keystrokes is
+worse than IDLEs.
+However,
+it is improving,
+and it is not totally unusable.
+More importantly,
+it pays for that rawness with the ability
+to re-define your function in the memory space
+that already has your carefully crafted
+test data,
+without the need to load it from pickle
+(or,
+God help you,
+JSON).
 
-\begin{itemize}
-\item Lisp
-\item Smalltalk
-\item Logo
-\item GW-Basic
-\end{itemize}
+\begin{frame}
+\frametitle{Proud tradition}
+
+Lisp, Smalltalk, Logo, GW-Basic.
 
 \end{frame}
+
+This is not a new thing in development environments.
+This used to be what a development environment *is*:
+not something that starts processes which run your code,
+but something that allows you to interactively manipulate your code.
+
+In the 80s, programming was fun.
+In a world which needs more programmers,
+and more diverse programmers,
+I want us to each contribute to making sure programming stays fun.
 
 \end{document}
