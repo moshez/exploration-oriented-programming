@@ -217,30 +217,41 @@ If you are not using IPython as your REPL,
 you should start!
 
 \begin{frame}[fragile]
-\frametitle{Managing Kernels}
+\frametitle{Server vs. Kernel}
 
-\begin{lstlisting}
-def add_to(kernel_venv, jupyter_venv):
-    python = os.path.join(kernel_venv, 'bin', 'python')
-    name = os.path.basename(kernel_venv)
-    subprocess.check_call([python, '-m',
-                           'pip', 'install', 'ipykernel'])
-    subprocess.check_call([python, '-m',
-                           'ipykernel', 'install',
-                           '--name', name,
-                           '--display-name', name,
-                           '--prefix', venv])
-    jupyter = os.path.join(jupyter_venv, 'bin', 'jupyter')
-    spec = os.path.join(venv, 'share/jupyter/kernels', name)
-    subprocess.check_call([jupyter, 'kernelspec', 'install', spec])
-\end{lstlisting}
-\end{frame}
+One Jupyter server,
+many kernels.
+
+\end{frame} 
 
 One server can support multiple virtual environments.
 Assuming you're doing the reasonable thing and installing
 Jupyter server itself in a virtual environment,
 the instructions for how to add a virtual environment
 to an existing servers are not clear.
+
+\begin{frame}[fragile]
+\frametitle{Adding a Kernel}
+
+\begin{lstlisting}
+def add_to(kernel_venv, jupyter_venv):
+    cc = subprocess.check_call
+    python = os.path.join(kernel_venv, 'bin', 'python')
+    name = os.path.basename(kernel_venv)
+    cc([python, '-m', 'pip', 'install', 'ipykernel'])
+    cc([python, '-m',
+        'ipykernel', 'install',
+        '--name', name,
+        '--display-name', name,
+        '--prefix', venv])
+    spec = os.path.join(kernel_venv,
+                        'share/jupyter/kernels',
+                        name)
+    jupyter = os.path.join(jupyter_venv, 'bin', 'jupyter')
+    cc([jupyter, 'kernelspec', 'install', spec])
+\end{lstlisting}
+\end{frame}
+
 
 However,
 once followed,
