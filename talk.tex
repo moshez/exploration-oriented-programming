@@ -236,18 +236,19 @@ to an existing servers are not clear.
 \begin{lstlisting}
 def add_to(kernel_venv, jupyter_venv):
     cc = subprocess.check_call
-    python = os.path.join(kernel_venv, 'bin', 'python')
-    name = os.path.basename(kernel_venv)
-    cc([python, '-m', 'pip', 'install', 'ipykernel'])
+    p = os.path
+    python = p.join(kernel_venv, 'bin', 'python')
+    name = p.basename(kernel_venv)
+    cc([python, '-m',
+        'pip', 'install', 'ipykernel'])
     cc([python, '-m',
         'ipykernel', 'install',
         '--name', name,
         '--display-name', name,
         '--prefix', venv])
-    spec = os.path.join(kernel_venv,
-                        'share/jupyter/kernels',
-                        name)
-    jupyter = os.path.join(jupyter_venv, 'bin', 'jupyter')
+    spec = p.join(kernel_venv,
+                  'share/jupyter/kernels', name)
+    jupyter = p.join(jupyter_venv, 'bin/jupyter')
     cc([jupyter, 'kernelspec', 'install', spec])
 \end{lstlisting}
 \end{frame}
@@ -418,7 +419,6 @@ but one from your notebook before the end.
 \frametitle{Immutable data structures}
 
 \begin{lstlisting}[frame=single]
-from pyrsistent import v
 a = v(1, 2, 3)
 \end{lstlisting}
 
@@ -512,7 +512,8 @@ Immutability good!
 \begin{lstlisting}[frame=single]
 @singledispatch
 def abs(thing):
-    raise NotImplementedError("Cannot absolute value", thing)
+    raise NotImplementedError("No abs",
+                              thing)
 \end{lstlisting}
 
 \begin{lstlisting}[frame=single]
@@ -722,12 +723,12 @@ it can be worth it.
 @attr.s(frozen=True)
 class NotebookLoader:
     contents = attr.ib()
-
     def create_module(self, spec):
-        return importlib.util.module_from_spec(spec)
-
+        util = importlib.util
+        return util.module_from_spec(spec)
     def exec_module(self, module):
-        for cell in json.loads(contents)["cells"]:
+        cells = json.loads(contents)["cells"]
+        for cell in cells:
             if cell.starts_with("#pragma: module"):
                exec(cell, module.__dict__)
 \end{lstlisting}
@@ -758,7 +759,8 @@ class NotebookFinder(object):
         name = fullname.split('.')[-1] + '.ipynb'
         if not resources.is_resource(path, name):
             return None
-        return NotebookLoader(resources.read_text(path, name))
+        text = resources.read_text(path, name)
+        return NotebookLoader(text)
 
 import sys
 sys.meta_path.append(NotebookFinder())
