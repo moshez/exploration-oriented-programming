@@ -168,6 +168,17 @@ as a community,
 we all get to achieve it.
 
 \begin{frame}
+\frametitle{Level one}
+
+Welcome to Jupyter
+\end{frame}
+
+If you have never used Jupyter before,
+you are in for a ride.
+It is an amazing environment,
+and quite addictive to boot!
+
+\begin{frame}
 \frametitle{What is Jupyter?}
 
 \begin{itemize}
@@ -196,7 +207,6 @@ so it's a complete IDE in one.
 \item Handles snippets
 \item In-memory state
 \item Semi-disposable
-\item Tornado event loop
 \end{itemize}
 
 \end{frame}
@@ -206,10 +216,6 @@ it is a Python server
 that receives snippets,
 executes them in its internal namespace,
 and then sends back the results.
-
-It uses the tornado event loop internally,
-and since Python is pretty loose about things,
-this fact is exposed to the end user.
 
 Jupyter makes it easy to recycle the kernel,
 in case we do not *want* the persistent
@@ -343,34 +349,6 @@ but none of the memory state.
 It maps,
 pretty much,
 to what is on the screen.
-
-
-\begin{frame}[fragile]
-\frametitle{Notebooks from the Inside}
-
-\begin{lstlisting}
-{
- "cells": [
-  { "cell_type": "code",
-   ...
-    "source": ["1 + 1"]
-  }
- ]
- "nbformat": 4,
- "nbformat_minor": 1
-}
-\end{lstlisting}
-
-\end{frame}
-
-A notebook,
-from the inside,
-is just a JSON file.
-It has some metadata,
-and an array of "cells",
-which include the type of cells,
-as well as the source
-and possibly the output.
 
 7 minute mark
 
@@ -554,6 +532,40 @@ I often recommend using it anyway,
 since it properly namespaces methods.
 This is one additional reason to use it.
 
+\begin{frame}
+\frametitle{Level two}
+
+Collaboration
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Notebooks from the Inside}
+
+\begin{lstlisting}
+{
+ "cells": [
+  { "cell_type": "code",
+   ...
+    "source": ["1 + 1"]
+  }
+ ]
+ "nbformat": 4,
+ "nbformat_minor": 1
+}
+\end{lstlisting}
+
+\end{frame}
+
+A notebook,
+from the inside,
+is just a JSON file.
+It has some metadata,
+and an array of "cells",
+which include the type of cells,
+as well as the source
+and possibly the output.
+
+
 \begin{frame}[fragile]
 \frametitle{Version control}
 
@@ -644,53 +656,6 @@ this process ensures we are not missing any important
 differences.
 
 \begin{frame}[fragile]
-
-\frametitle{Lint}
-
-\begin{lstlisting}
-% jupyter nbconvert --to=python something.ipynb
-% flake8 something.py
-\end{lstlisting}
-
-\end{frame}
-
-Running a linter is even easier:
-in CI,
-or via something like :code:`tox`
-or :code:`nox`,
-we can convert our notebooks to Python,
-and run lint against those.
-The downside,
-unfortunately,
-is that line numbers get jumbled.
-
-\begin{frame}[fragile]
-\frametitle{Test}
-
-\begin{lstlisting}
-with open("something.ipynb") as fpin:
-    notebook = json.loads(fpin.read())
-with open("something.py", "w") as fpout:
-    for cell in notebook["cells"]:
-        if ("# pragma: interactive-only" in
-            cell["source"]):
-            continue
-        fpout.write(f"\n{cell['source']}\n")
-subprocess.check_output(["pytest", "something.py"])
-\end{lstlisting}
-
-\end{frame}
-
-We can improvise something to directly run our notebook,
-with the exception of some "interactive-only"
-tests.
-If we have written "verifications" inside the notebook
-that are functions named "test" and use something like
-PyHamcrest,
-this will be useful to run automatically.
-
-
-\begin{frame}[fragile]
 \frametitle{Custom diff}
 
 \begin{lstlisting}
@@ -738,7 +703,65 @@ even with significant simplifications.
 However,
 it can be worth it.
 
+\begin{frame}
+\frametitle{Level three}
+
+Quality
+\end{frame}
+
+\begin{frame}[fragile]
+
+\frametitle{Lint}
+
+\begin{lstlisting}
+% jupyter nbconvert --to=python something.ipynb
+% flake8 something.py
+\end{lstlisting}
+
+\end{frame}
+
+Running a linter is even easier:
+in CI,
+or via something like :code:`tox`
+or :code:`nox`,
+we can convert our notebooks to Python,
+and run lint against those.
+The downside,
+unfortunately,
+is that line numbers get jumbled.
+
+\begin{frame}[fragile]
+\frametitle{Test}
+
+\begin{lstlisting}
+with open("something.ipynb") as fpin:
+    notebook = json.loads(fpin.read())
+with open("something.py", "w") as fpout:
+    for cell in notebook["cells"]:
+        if ("# pragma: interactive-only" in
+            cell["source"]):
+            continue
+        fpout.write(f"\n{cell['source']}\n")
+subprocess.check_output(["pytest", "something.py"])
+\end{lstlisting}
+
+\end{frame}
+
+We can improvise something to directly run our notebook,
+with the exception of some "interactive-only"
+tests.
+If we have written "verifications" inside the notebook
+that are functions named "test" and use something like
+PyHamcrest,
+this will be useful to run automatically.
+
 21 minute mark
+
+\begin{frame}
+\frametitle{Level four}
+
+Production
+\end{frame}
 
 \begin{frame}[fragile]
 \frametitle{Importing Notebooks}
